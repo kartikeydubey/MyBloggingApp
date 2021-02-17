@@ -1,0 +1,53 @@
+<h2 style="text-align: center">My Dashboard</h2>
+
+<br />
+<br />
+<div class="col-md-2">
+  <button class="btn btn-primary" (click)="openBlogModal()">Create</button>
+</div>
+<br />
+<div>
+  <table
+    class="table"
+    style="
+      margin-left: 20px;
+      margin-right: 20px;
+      table-layout: fixed;
+      width: 100%;
+    "
+  >
+    <thead>
+      <tr class="row">
+        <th class="col-md-1">#</th>
+        <th class="col-md-2">Title</th>
+        <th class="col-md-5">Description</th>
+        <th class="col-md-2" (click)="sortByDate()">
+          Date
+          <fa-icon [icon]="faSort"></fa-icon>
+        </th>
+        <th class="col-md-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let blog of blogs | async" class="row">
+        <th class="col-md-1">{{ blog?.id }}</th>
+        <td class="col-md-2" style="word-wrap: break-word">
+          {{ blog?.title }}
+        </td>
+        <td class="col-md-5" style="word-wrap: break-word">
+          {{ blog?.description }}
+        </td>
+        <td class="col-md-2" style="word-wrap: break-word">
+          {{ blog?.date }}
+        </td>
+        <td class="col-md-2">
+          <button type="btn btn-secondary" (click)="onEdit(blog)">Edit</button>
+          <button type="btn btn-secondary" (click)="onDelete(blog)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-create-edit-blog #createEditModal></app-create-edit-blog>
